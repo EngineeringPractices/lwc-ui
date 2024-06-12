@@ -1,0 +1,107 @@
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+{{ .Scratch.Set "title" .Site.Title }}
+
+{{ if eq .Kind "home" }}
+  {{ .Scratch.Set "title" .Site.Title }}
+{{ end }} 
+
+{{ if .IsSection }}
+  {{ .Scratch.Set "title" (.LinkTitle | humanize | title) }}
+  {{ .Scratch.Add "title" " | " }}
+  {{ .Scratch.Add "title" .Site.Title }}
+{{ end }} 
+
+{{ if .IsPage }}
+  {{ .Scratch.Set "title" (.File.TranslationBaseName | humanize | title) }}
+  {{ .Scratch.Add "title" " | " }}
+  {{ .Scratch.Add "title" .Site.Title }}
+{{ end }} 
+
+<!-- Title Tags -->
+<title itemprop="name">{{ .Scratch.Get "title" }}</title>
+<meta property="og:title" content={{ .Scratch.Get "title" }} />
+<meta name="twitter:title" content={{ .Scratch.Get "title" }} />
+<meta itemprop="name" content={{ .Scratch.Get "title" }} />
+<meta name="application-name" content={{ .Scratch.Get "title" }} />
+<meta property="og:site_name" content="{{ .Site.Title }}" />
+
+<!-- Description Tags -->
+<meta name="description" content="{{ .Site.Params.description }}" />
+<meta itemprop="description" content="{{ .Site.Params.description }}" />
+<meta property="og:description" content="{{ .Site.Params.description }}" />
+<meta name="twitter:description" content="{{ .Site.Params.description }}" />
+
+<!-- Link Tags -->
+<base href="{{ .Permalink }}" />
+<link rel="canonical" href="{{ .Permalink }}" itemprop="url" />
+<meta name="url" content="{{ .Permalink }}" />
+<meta name="twitter:url" content="{{ .Permalink }}" />
+<meta property="og:url" content="{{ .Permalink }}" />
+
+<!-- Image Tags -->
+<meta itemprop="image" content="{{ .Site.Params.og_image | absURL }}" />
+<meta property="og:image" content="{{ .Site.Params.og_image | absURL }}" />
+<meta name="twitter:image" content="{{ .Site.Params.og_image | absURL }}" />
+<meta name="twitter:image:src" content="{{ .Site.Params.og_image | absURL }}" />
+
+<!-- Date Tags -->
+<meta property="og:updated_time" content={{ .Lastmod.Format "2006-01-02T15:04:05Z0700" | safeHTML }} />
+
+<!-- Sitemap & RSS Feed Tags -->
+<link rel="sitemap" type="application/xml" title="Sitemap" href='{{ "sitemap.xml" | absURL }}' />
+{{ with .OutputFormats.Get "RSS" }}
+<link href="{{ .Permalink }}" rel="alternate" type="application/rss+xml" title="{{ $.Site.Title }}" />
+<link href="{{ .Permalink }}" rel="feed" type="application/rss+xml" title="{{ $.Site.Title }}" />
+{{ end }}
+
+<!-- Search Engine Crawler Tags -->
+<meta name="robots" content="index,follow" />
+<meta name="googlebot" content="index,follow" />
+
+<!-- Social Media Tags -->
+<meta name="twitter:site" content="{{ .Site.Params.twitter }}" />
+<meta name="twitter:creator" content="{{ .Site.Params.twitter }}" />
+
+<!-- Other Tags -->
+<meta name="apple-mobile-web-app-title" content="{{ .Site.Title }}" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta property="og:type" content="website" />
+<meta name="author" content="{{ .Site.Params.author }}" />
+<script defer type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "url": "{{ .Permalink }}",
+    "sameAs": ["{{ .Site.Params.github }}"],
+    "name": "{{ .Title }}",
+    "logo": "https://www.mynaui.com/favicon.png"
+  }
+</script>
+
+<!-- Preload Links -->
+<link rel="preload" href="/main.css" as="style" />
+<link
+  rel="preload"
+  href="/fonts/alegreya-latin-variable-wghtOnly-normal.woff2"
+  as="font"
+  type="font/woff2"
+  crossorigin />
+<link
+  rel="preload"
+  href="/fonts/alegreya-latin-variable-wghtOnly-italic.woff2"
+  as="font"
+  type="font/woff2"
+  crossorigin />
+<link rel="preconnect" href="https://source.boringavatars.com" crossorigin />
+
+<!-- Links -->
+<link rel="stylesheet" href="/main.css" />
+
+<!-- Favicon Tag -->
+<link
+  rel="icon"
+  href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2016%2016'%3E%3Ctext%20x='0'%20y='14'%3E🐦%3C/text%3E%3C/svg%3E"
+  type="image/svg+xml" />

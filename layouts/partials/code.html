@@ -1,0 +1,146 @@
+<div class="mb-14 relative">
+  <div class="mb-1.5 flex items-center justify-between">
+    <a 
+      id={{ .File.ContentBaseName }}
+      href="#{{ .File.ContentBaseName }}"
+      class="block font-alegreya font-medium text-gray-700 truncate">
+      {{ .File.TranslationBaseName | humanize | title }}
+    </a>
+    <div class="flex items-center mr-6">
+      <a
+        href=https://github.com/praveenjuge/myna/blob/main/content/{{ .File.Path }}
+        target="_blank"
+        rel="noopener noreferrer"
+        title="See on GitHub"
+        class="select-none appearance-none rounded p-1 hover:bg-gray-200">
+        <svg
+          aria-hidden="true"
+          class="h-4 w-4 stroke-gray-600"
+          viewBox="0 0 256 256">
+          <path
+            d="M84,240a23.9,23.9,0,0,0,24-24V168"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="24"></path>
+          <path
+            d="M172,240a23.9,23.9,0,0,1-24-24V168"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="24"></path>
+          <path
+            d="M152,168h16a23.9,23.9,0,0,1,24,24v8a23.9,23.9,0,0,0,24,24"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="24"></path>
+          <path
+            d="M104,168H88a23.9,23.9,0,0,0-24,24v8a23.9,23.9,0,0,1-24,24"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="24"></path>
+          <path
+            d="M111.8,64A52,52,0,0,0,68,40a52,52,0,0,0-3.5,44.7A49.3,49.3,0,0,0,56,112v8a48,48,0,0,0,48,48h48a48,48,0,0,0,48-48v-8a49.3,49.3,0,0,0-8.5-27.3A52,52,0,0,0,188,40a52,52,0,0,0-43.8,24Z"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="24"></path>
+        </svg>
+      </a>
+      <a
+        href="{{ .Permalink }}"
+        target="_blank"
+        rel="noopener noreferrer"
+        title="View in Separate Page"
+        class="select-none appearance-none rounded p-1 hover:bg-gray-200">
+        <svg
+          aria-hidden="true"
+          class="h-4 w-4 stroke-gray-600"
+          viewBox="0 0 256 256">
+          <polyline
+            points="216 100 216 40 156 40"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="24"></polyline>
+          <line
+            x1="144"
+            y1="112"
+            x2="216"
+            y2="40"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="24"></line>
+          <path
+            d="M184,144v64a8,8,0,0,1-8,8H48a8,8,0,0,1-8-8V80a8,8,0,0,1,8-8h64"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="24"></path>
+        </svg>
+      </a>
+      <div aria-hidden="true" class="w-px bg-gray-200 h-4 mx-1"></div>
+      <button
+        title="Copy Code"
+        class="select-none appearance-none rounded p-1 hover:bg-gray-200 active:bg-gray-700 group"
+        onclick="navigator.clipboard.writeText(document.getElementById('{{ .File.ContentBaseName }}-play').innerHTML)"
+      >
+        <svg aria-hidden="true" class="h-4 w-4 stroke-gray-600 group-active:stroke-white" viewBox="0 0 256 256">
+          <polyline points="220 176 220 36 80 36" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline>
+          <rect x="40" y="76" width="140" height="140" stroke-linecap="round" stroke-linejoin="round" stroke-width="24" class="fill-transparent group-active:fill-white"></rect>
+        </svg>
+      </button>
+    </div>
+  </div>
+  <details class="peer group">
+    <summary class="select-none appearance-none rounded p-1 hover:bg-gray-200 group-open:bg-gray-700 hover:group-open:bg-gray-800 absolute top-0 right-0 cursor-pointer inline-flex list-none marker:hidden">
+      <svg
+        aria-hidden="true"
+        class="h-4 w-4 stroke-gray-600 group-open:stroke-white"
+        fill="currentColor"
+        viewBox="0 0 256 256">
+        <polyline
+          points="64 88 16 128 64 168"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="24"></polyline>
+        <polyline
+          points="192 88 240 128 192 168"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="24"></polyline>
+        <line
+          x1="160"
+          y1="40"
+          x2="96"
+          y2="216"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="24"></line>
+      </svg>
+    </summary>
+    <div class="prose relative max-w-none prose-pre:my-0 prose-pre:max-h-[20rem]">
+      {{ .Scratch.Set "finalCode" (replace .Content "\n<" "<" 1) }} {{ if
+      .Params.forms }} {{ .Scratch.Set "finalCode" (print "<!-- Needs TailwindCSS Forms Plugin github.com/tailwindlabs/tailwindcss-forms -->"
+      .Content) }} {{ end }} {{ highlight (.Scratch.Get "finalCode") "html"
+      "style=dracula" }}
+    </div>
+  </details>
+  <div class="relative w-full overflow-hidden rounded border peer-open:hidden">
+    {{ if .Params.headerPadding }}
+    <div class="h-16 bg-gray-100" aria-hidden="true"></div>
+    {{ end }}
+    <div class="{{ .Params.wrapper }}" id='{{ .File.ContentBaseName }}-play'>{{ replace .Content "\n<" "<" 1 | safeHTML }}</div>
+    {{ if .Params.footerPadding }}
+    <div class="mx-auto max-w-7xl px-4 my-6" aria-hidden="true">
+      <div class="rounded border-2 border-dashed border-gray-200 p-6"></div>
+    </div>
+    {{ end }}
+  </div>
+</div>

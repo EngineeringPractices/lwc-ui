@@ -1,0 +1,14 @@
+baseURL = "https://mynaui.com/"
+title = "Myna UI"
+languageCode = "en-us"
+
+enableGitInfo = true
+enableRobotsTXT = true
+disableKinds = ["taxonomy", "taxonomyTerm"]
+
+[params]
+  description = "UI Components and Elements made with Tailwind CSS. Free. Open Source. Accessible. With Figma Kit."
+  author = "Praveen Juge"
+  github = "https://github.com/praveenjuge/myna"
+  og_image = "/og.jpg"
+  twitter = "@praveenjuge"
